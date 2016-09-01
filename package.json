@@ -1,0 +1,11 @@
+{
+  "name": "fireform",
+  "version": "1.0.0",
+  "description": "testing firebase",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nate Martin <godmetweenciati@gmail.com> (https://github.com/n8e)",
+  "license": "MIT"
+}

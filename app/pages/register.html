@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Register</title>
+    <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+  </head>
+  <body>
+    <div class='container'>
+      <p>Please register here</p>
+      <form className='orderform'>
+        <div className='name' style='margin: 15px; border:1px solid #fff; padding: 20px; border-radius: 4px;'>
+          <div className='name-label' style='display: inline-block;'>
+            <label>Name:</label>
+          </div>
+          <div className='first-name' style='display: inline-block;'>
+            <input type='text' placeholder='First Name' id='firstName'></input>
+          </div>
+          <div className='last-name' style='display: inline-block;'>
+            <input type='text' placeholder='Last Name' id='lastName'></input>
+          </div>
+        </div>
+        <div className='phone' style='margin: 15px; border:1px solid #fff; padding: 20px; border-radius: 4px;'>
+          <div className='phone-label' style='display: inline-block;'>
+            <label>Contact Phone Number:</label>
+          </div>
+          <div className='area-code' style='display: inline-block; width: 28px;'>
+            <input type='text' placeholder='code' id='phoneCode' />
+          </div>
+          <div className='phone-number' style='display: inline-block;'>
+            <input type='text' placeholder='phone number' id='phoneNumber' />
+          </div>
+        </div>
+        <div className='address' style='margin: 15px; border:1px solid #fff; padding: 20px; border-radius: 4px;'>
+          <div className='address-label'>
+            <label>Delivery address:</label>
+          </div>
+          <div className='address-inputs' style='flex: auto;'>
+            <input type='text' placeholder='address line 1' id='addressOne' />
+            <input type='text' placeholder='address line 2' id='addressTwo' />
+            <div className='city-state'>
+              <div className='city' style='display: inline-block;'>
+                <input type='text' placeholder='city' id='city' />
+              </div>
+              <div className='state' style='display: inline-block;'>
+                <input type='text' placeholder='state/province' id='state' />
+              </div>
+            </div>
+            <div className='zip-country'>
+              <div className='zip' style='display: inline-block;'>
+                <input type='text' placeholder='ZIP' id='zip' />
+              </div>
+              <div className='country' style='display: inline-block;'>
+                <input type='text' placeholder='Country' id='country' />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="margin: 10px;">
+          <button onclick="constructDataObj()">Submit</button>
+        </div>
+        <div style="margin: 10px;">
+          <button onclick="viewDataObj()">Show</button>
+        </div>
+      </form>
+    </div>
+    <script>
+      var dataObj = {
+        firstName: '',
+        lastName: '',
+        phoneCode: '',
+        phoneNumber: '',
+        addressOne: '',
+        addressTwo: '',
+        city: '',
+        state: '',
+        zip: '',
+        country: ''
+      };
+
+      var dataKeys = [];
+
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyAYxcqK3pJIwSyhg4ZRqhOVYur5SHM2iiI",
+        authDomain: "fireform-e1f9a.firebaseapp.com",
+        databaseURL: "https://fireform-e1f9a.firebaseio.com",
+        storageBucket: "fireform-e1f9a.appspot.com",
+      };
+
+      firebase.initializeApp(config);
+
+      var database = firebase.database();
+
+      function constructDataObj(event) {
+        dataObj.firstName = document.getElementById('firstName').value;
+        dataObj.lastName = document.getElementById('lastName').value;
+        dataObj.phoneCode = document.getElementById('phoneCode').value;
+        dataObj.phoneNumber = document.getElementById('phoneNumber').value;
+        dataObj.addressOne = document.getElementById('addressOne').value;
+        dataObj.addressTwo = document.getElementById('addressTwo').value;
+        dataObj.city = document.getElementById('city').value;
+        dataObj.state = document.getElementById('state').value;
+        dataObj.zip = document.getElementById('zip').value;
+        dataObj.country = document.getElementById('country').value;
+
+        firebase.database().ref('/').push(dataObj);
+        console.log('data object', dataObj);
+      }
+
+
+      database.ref('/').on('value', function(snapshot) {
+        var items = snapshot.val();
+        // console.log(items);
+        for (key in items) {
+          var userObj = items[key];
+          // console.log('user object', userObj);
+          var userDiv = document.createElement('div');
+          userDiv.innerHTML = "HERE NOW";
+          for (sub_key in userObj) {
+              console.log(userObj[sub_key]);
+              userDiv.innerHTML = userObj[sub_key];
+          }
+          document.body.appendChild(userDiv);
+        }
+      });
+    </script>
+  </body>
+</html>

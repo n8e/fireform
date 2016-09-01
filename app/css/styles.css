@@ -1,0 +1,50 @@
+body {
+  background-image: url('../images/bg-image.jpg');
+  background-size: cover;
+  color: #fff;
+  font-family: 'Arial', 'Verdana', 'Calibri';
+}
+.container {
+  float: right;
+  height: inherit;
+  margin-top: 5%;
+  text-align: center;
+  width: 55%;
+}
+
+.orderform {
+  background-color: #bebebe;
+  font-size: 80%;
+  height: 100%;
+  margin: auto;
+  text-align: center;
+  width: 70%;
+}
+input {
+  border-radius: 4px;
+  height: 25px;
+}
+.name {
+  border-bottom: 20px;
+  display: inline-block;
+  width: 100%;
+}
+.name-label, .first-name, .last-name {
+  display: inline-block;
+  width: 33%;
+}
+.city-state, .zip-country {
+      width: 100%;
+    }
+.city, .state, .zip, .country {
+        display: inline-block;
+        width: 50%;
+      }
+button {
+    border: 2px solid #fff;
+    border-radius: 4px;
+    background-color: #000;
+    color: #fff;
+    height: 30px;
+    width: 40%;
+  }
